@@ -30,3 +30,4 @@ export function capitalize(text) {
   });
   return capsArray.join(" ");
 }
+

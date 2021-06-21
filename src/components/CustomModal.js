@@ -8,7 +8,6 @@ export default function CustomModal({ isOpen, toggleModal, title, children }) {
         className="fixed inset-0 z-10 overflow-y-auto"
         onClose={toggleModal}
       >
-        
         <div className="min-h-screen px-4 text-center">
           <Transition.Child
             as={Fragment}
@@ -39,17 +38,12 @@ export default function CustomModal({ isOpen, toggleModal, title, children }) {
             leaveTo="opacity-0 scale-95"
           >
             <div className="inline-block w-full max-w-md p-3 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
-             
-              <div className="mt-4">
-               
-                {children}
-              
-              </div>
+              <div className="mt-4">{children}</div>
 
               <div className="mt-4 text-right">
                 <button
                   type="button"
-                  className="inline-flex justify-center px-4 py-1 text-xs font-medium text-blue-900 bg-blue-100 border border-transparent rounded-md hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500"
+                  className="font-optima font-bold inline-flex justify-center px-4 py-1 text-xs font-medium text-blue-900 bg-blue-100 border border-transparent rounded-md hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500"
                   onClick={toggleModal}
                 >
                   Close

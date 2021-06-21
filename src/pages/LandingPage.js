@@ -31,7 +31,6 @@ export default function LandingPage() {
     })
   }
   const handleIconChange = (icon) => {
-    console.log(icon)
     setData({ ...data, icon })
     toggleIconsModal()
   }
@@ -107,13 +106,13 @@ export default function LandingPage() {
           </section>
           <section className="mb-4">
             <label
-              className="block text-gray-700 text-sm font-bold mb-2"
+              className="block text-gray-700 text-sm font-optima font-bold mb-2"
               htmlFor="username"
             >
               Username *
             </label>
             <input
-              className={`shadow appearance-none border ${
+              className={`font-optima shadow appearance-none border ${
                 data.error && "border-red-500"
               } rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline`}
               id="username"
@@ -125,13 +124,13 @@ export default function LandingPage() {
           </section>
           <section className="mb-6">
             <label
-              className="block text-gray-700 text-sm font-bold mb-2"
+              className="font-optima block text-gray-700 text-sm font-bold mb-2"
               htmlFor="password"
             >
               Name of Repository (Public) *
             </label>
             <input
-              className={`shadow appearance-none border ${
+              className={`font-optima shadow appearance-none border ${
                 data.error && "border-red-500"
               } rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline`}
               id="password"
@@ -143,7 +142,7 @@ export default function LandingPage() {
           </section>
           <section className="mb-6 flex justify-between font-bold italic">
             <label className="flex items-center space-x-2 cursor-pointer">
-              <span className="text-xs" style={{ color: data.color }}>
+              <span className="text-xs font-optima-light" style={{ color: data.color }}>
                 Select Color
               </span>
               <input
@@ -159,17 +158,17 @@ export default function LandingPage() {
               onClick={() => toggleIconsModal()}
             >
               {data.icon ? (
-                <i className={`${icons[data.icon]}`}></i>
+                <i className={`${icons[data.icon]}`} />
               ) : (
-                <span className="text-xs">Select Icon</span>
+                <span className="text-xs font-optima-light">Select Icon</span>
               )}
-              <i className="far fa-edit"></i>
+              <i className="far fa-edit" />
             </section>
           </section>
 
           <section className="">
             <button
-              className=" block w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline flex justify-center items-center"
+              className="font-optima block w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline flex justify-center items-center"
               type="button"
               disabled={loading}
               onClick={checkUserNameRepo}
@@ -186,12 +185,12 @@ export default function LandingPage() {
 
           {/* Error */}
           {data.error && (
-            <p className="mt-3 text-red-500 text-xs italic">
+            <p className="mt-3 text-red-500 text-xs font-optima-light">
               Something went wrong, check username and repository
             </p>
           )}
         </form>
-        <p className="text-center text-gray-500 text-xs">
+        <p className="text-center text-gray-500 text-xs font-optima">
           &copy;2021 SuperChat Challenge. All rights reserved.
         </p>
       </section>

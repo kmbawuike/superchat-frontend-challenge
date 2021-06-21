@@ -24,11 +24,9 @@ export default function DetailsPage({ match }) {
           )
         ).json(),
       ])
-      console.log(repoReq, contributorsReq)
+
       setData({ ...data, repository: repoReq, contributors: contributorsReq })
-    } catch (e) {
-      console.log(e)
-    }
+    } catch (e) {}
   }
 
   useEffect(() => {
@@ -42,42 +40,6 @@ export default function DetailsPage({ match }) {
 
   const { repository, contributors } = data
 
-  const Contributors = () => {
-    return (
-      <section className="space-y-3 max-h-80 overflow-auto">
-        {contributors &&
-          contributors.slice(0, 50).map((contributor, key) => (
-            <a
-              href={`${contributor?.html_url}`}
-              className="block border-0 outline-none bg-gray-200 rounded-tl-lg rounded-br-lg p-3 flex flex-col sm:flex-row sm:items-center space-y-4 sm:space-y-0 sm:space-x-3"
-              key={key}
-            >
-              <h3 className="mr-2 font-semibold">{key + 1}</h3>
-              <section className="flex items-center sm:w-1/2">
-                <section className="w-3/12">
-                  <img
-                    src={contributor?.avatar_url}
-                    alt={`contributor-${key}`}
-                    className="w-full rounded-full border-2 border-blue-100"
-                  />
-                </section>
-
-                <span className="block sm::w-9/12 pl-2 break-words text-blue-600 visited:text-purple-600">
-                  {contributor?.login}
-                </span>
-              </section>
-              <section
-                style={styles.bgColor}
-                className="text-white px-3 py-2 text-xs rounded-2xl sm:w-5/12 text-center"
-              >
-                <p>{`${contributor?.contributions} contributions`}</p>
-              </section>
-            </a>
-          ))}
-      </section>
-    )
-  }
-
   const styles = {
     textColor: {
       color: decodeColor(color),
@@ -85,7 +47,55 @@ export default function DetailsPage({ match }) {
     bgColor: {
       backgroundColor: decodeColor(color),
     },
+    borderColor: {
+      border: `1px solid ${decodeColor(color)}`,
+    },
   }
+  const Contributors = () => {
+    return (
+      <section className="space-y-3 max-h-80 overflow-auto">
+        {contributors &&
+          contributors.slice(0, 50).map((contributor, key) => (
+            <a
+              href={`${contributor?.html_url}`}
+              className="shadow-inner block border-0 outline-none bg-gray-100 rounded-tl-lg rounded-br-lg p-3 flex flex-col sm:flex-row sm:items-center space-y-4 sm:space-y-0 sm:space-x-3"
+              key={key}
+            >
+              <h3
+                className="mr-2 font-semibold font-optima"
+                style={styles.textColor}
+              >
+                {key + 1}
+              </h3>
+              <section className="flex items-center sm:w-1/2">
+                <section className="w-3/12">
+                  <img
+                    src={contributor?.avatar_url}
+                    alt={`contributor-${key}`}
+                    className="w-full rounded-full"
+                    style={styles.borderColor}
+                  />
+                </section>
+
+                <span
+                  className="font-optima block sm::w-9/12 pl-2 break-words text-blue-600"
+                  style={styles.textColor}
+                >
+                  {contributor?.login}
+                </span>
+              </section>
+              <section
+                style={styles.bgColor}
+                className="text-white px-3 py-2 text-xs rounded-2xl sm:w-5/12 text-center"
+              >
+                <p className="font-optima-light font-bold">{`${contributor?.contributions} contributions`}</p>
+              </section>
+            </a>
+          ))}
+      </section>
+    )
+  }
+
   return (
     <section className="h-screen flex flex-col justify-center items-center bg-gray-100 px-4">
       {repository && contributors ? (
@@ -96,19 +106,21 @@ export default function DetailsPage({ match }) {
               <i
                 className={`${icons[icon]} text-8xl `}
                 style={styles.textColor}
-              ></i>
+              />
             </section>
           </section>
 
           {/* Repository name and description */}
           <section className="mb-6">
-            <h1 className="font-bold mb-4">{capitalize(repository?.name)}</h1>
+            <h1 className="font-bold mb-4 font-optima text-xl">
+              {capitalize(repository?.name)}
+            </h1>
             <p className="leading-loose">{repository?.description}</p>
           </section>
           {/* Contributors */}
           <section className="w-full mb-6">
             <section className="w-full">
-              <h2 className="font-semibold mb-3" style={styles.textColor}>
+              <h2 className="font-semibold font-optima-light text-sm font-optima mb-3">
                 Top Contributors
               </h2>
               <section className="flex flex-wrap w-full max-w-xs">
@@ -122,9 +134,8 @@ export default function DetailsPage({ match }) {
                       <img
                         src={contributor?.avatar_url}
                         alt={`contributor-${key}`}
-                        className="w-10 rounded-full border-2 border-blue-100"
-                        data-toggle="tooltip"
-                        data-title="kelechi mbawuike"
+                        className="w-10 rounded-full"
+                        style={styles.borderColor}
                       />
                     </section>
                   ))}
@@ -136,10 +147,10 @@ export default function DetailsPage({ match }) {
             {/* Repository meta data */}
             <section className="flex space-x-4 mb-6 sm:mb-0">
               <section
-                className="flex items-baseline cursor-pointer hover:text-blue-400"
+                className="flex items-baseline cursor-pointer"
                 onClick={toggleContributorsModal}
               >
-                <i className="fas fa-users mr-1"></i>
+                <i className="fas fa-users mr-1" style={styles.textColor} />
                 <section>
                   <span className="block mb-1 text-sm">
                     {contributors.length}
@@ -150,7 +161,10 @@ export default function DetailsPage({ match }) {
                 </section>
               </section>
               <section className="flex items-baseline cursor-pointer">
-                <i className="fas fa-code-branch mr-1"></i>
+                <i
+                  className="fas fa-code-branch mr-1"
+                  style={styles.textColor}
+                />
                 <section>
                   <span className="block mb-1 text-sm">
                     {repository?.forks_count}
@@ -162,7 +176,7 @@ export default function DetailsPage({ match }) {
                 className=" block flex items-baseline cursor-pointer"
                 href={repository?.html_url}
               >
-                <i className="far fa-star mr-1"></i>
+                <i className="far fa-star mr-1" style={styles.textColor} />
                 <section>
                   <span className="block mb-1 text-sm">
                     {repository?.stargazers_count}
@@ -176,7 +190,7 @@ export default function DetailsPage({ match }) {
             <section className="flex flex-col items-end">
               <section>
                 <p
-                  className="mb-3 text-xs font-semibold"
+                  className="mb-3 text-xs font-semibold font-optima-light"
                   style={styles.textColor}
                 >
                   Created By
@@ -187,7 +201,9 @@ export default function DetailsPage({ match }) {
                     alt={repository?.owner?.login}
                     className="w-10 rounded-full mr-1"
                   />
-                  <span className="font-bold">{repository?.owner?.login}</span>
+                  <span className="font-bold font-optima">
+                    {repository?.owner?.login}
+                  </span>
                 </section>
               </section>
             </section>

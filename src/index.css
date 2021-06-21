@@ -1,4 +1,15 @@
 /* ./src/index.css */
 @tailwind base;
 @tailwind components;
+
+@font-face {
+  font-family: 'Optima nova LT Pro Regular';
+  src: local('Optima nova LT Pro Regular'), url(./assets/fonts/OptimaNovaLTProRegular.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Optima nova LT Pro Light Italic';
+  src: local('Optima nova LT Pro Light Italic'), url(./assets/fonts/OptimaNovaLTProLightItalic.woff) format('woff');
+}
+
 @tailwind utilities;
