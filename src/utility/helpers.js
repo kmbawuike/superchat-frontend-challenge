@@ -14,3 +14,11 @@ export async function sendRequest(
     },
   });
 }
+
+export const encodeColor = (color) =>{
+  return color.replace('#','color')
+}
+
+export const decodeColor = (color) =>{
+  return color.replace('color','#')
+}
